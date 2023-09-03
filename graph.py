@@ -22,16 +22,21 @@ for i in range(8):
     time = 2*math.pi*math.sqrt(distance/9.80665)
     y2.append(time)
 
-error = abs(sum(y1)/8 / sum(y2)/8) * 100
-print(error)
+experiment = sum(y1)/8
+theory = sum(y2)/8
+error = abs((experiment-theory)/theory)*100
+print(f"Percentage Error: {error}"  )
 
 fig, ax = plt.subplots()
+plt.rcParams['text.usetex'] = True
+font = {"fontname":"Times New Roman"}
 
-ax.plot(x1, y1, color="r", linewidth=2, label="Collected Data")
-ax.plot(x1, y2, color="b", linewidth=2, label="Expected Data")
-ax.legend()
+ax.plot(x1, y2, color="b", linewidth=2, label=r"\fontfamily{Times}\selectfont $T=2\pi \sqrt{\frac Lg}$")
+ax.plot(x1, y1, color="r", linewidth=2, label=r"\fontfamily{Times}\selectfont Collected Data")
 
-ax.set_title("Average Period Time Relative to String Length")
-plt.ylabel("Average Period Time in Seconds")
-plt.xlabel("String Length in Centimeters")
-plt.savefig("graph.png")
+ax.legend(loc=4, frameon=False, title=r"\fontfamily{Times}\selectfont $g=9.80665m/s^2$")
+
+ax.set_title("Average Period Time Relative to String Length", **font)
+ax.set_ylabel("Average Period Time in Seconds (T)", **font)
+ax.set_xlabel("String Length in Centimeters (L)", **font)
+plt.savefig("graph.png", dpi=250)
