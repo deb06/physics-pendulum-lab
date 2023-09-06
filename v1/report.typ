@@ -82,11 +82,6 @@ Finally, repeat the second step with the different lengths of string as outline 
 This graph represents the theoretical outcome from the equation with the blue line, and the average time of all 3 trials on the red line. The data for the red line was derived from $T = (t_1+t_2+t_3)/15$. $t_1$, $t_2$, and $t_3$ represent the three different trials respectively, and their sum was divided by 15 because there was 5 periods measured in each trial, meaning a total of 15 periods were measured. The data for the blue line was derived from plugging each of the string lengths into the equation $T = 2pi sqrt(L/g)$, where $g$ is assumed to be 9. 80665$m$/$s^2$. Below is a table with all of the averaged data and calculated theoretical data.
 #align(center)[
     #let data = csv("averaged_data.csv")
-    #let new-rows = data.map(row => {
-    row.at(row.len() - 1) = [#row.last()$m$/$s^2$]
-    // return the new row
-    row
-    })
     #table(
         columns: 5,
         rows: 9,
@@ -94,8 +89,8 @@ This graph represents the theoretical outcome from the equation with the blue li
         [Experimental],
         [Theoretical],
         [Percent Error],
-        [Experimental Value of $g$],
-        ..new-rows.flatten(),
+        [Experimental Value of $g$ ($m$/$s^2$)],
+        ..data.flatten(),
     )
 ]
 = Analysis

@@ -1,6 +1,7 @@
 import csv
 import math
 import matplotlib.pyplot as plt
+import numpy as np
 
 x1 = []
 y1 = []
@@ -33,7 +34,7 @@ with open("averaged_data.csv", "w", newline="") as avg_csvfile:
         distance = str((x+1)*10)+"cm"
         experiment = str(round(y1[x], 2))+"s"
         theory = str(round(y2[x], 2))+"s"
-        row = [distance,experiment,theory,percent_error, grav_format]
+        row = [distance,experiment,theory,percent_error,grav_format]
         csvwriter.writerow(row)
 
 #Find gravity from experimental data
@@ -46,13 +47,13 @@ for y in range(8):
     results.append(gravity)
 
 average_gravity = sum(results)/len(results)
-print(average_gravity)
+print(f"Derived value of g: {average_gravity}")
 
-#Find percentage error
+#Find percentage error for time
 experiment = sum(y1)/8
 theory = sum(y2)/8
 error = abs((experiment-theory)/theory)*100
-print(f"Percentage Error: {error}"  )
+print(f"Percentage Error: {error}")
 
 #Graph data
 fig, ax = plt.subplots()
@@ -67,4 +68,4 @@ ax.legend(loc=4, frameon=False, title=r"\fontfamily{Times}\selectfont $g=9.80665
 ax.set_title("Average Period Time Relative to String Length", **font)
 ax.set_ylabel("Average Period Time in Seconds (T)", **font)
 ax.set_xlabel("String Length in Centimeters (L)", **font)
-plt.savefig("graph.png", dpi=250)
+plt.savefig("v1/graph.png", dpi=250)
